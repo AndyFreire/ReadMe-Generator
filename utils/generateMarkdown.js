@@ -15,6 +15,10 @@ function generateMarkdown(data) {
 
   const licenseBadge = `[![GitHub license](https://img.shields.io/github/license/${data.userName}/${data.title})](https://github.com/${data.userName}/${data.title})`;
 
+  const profileImage = `![${data.userName}](https://github.com/${data.userName}.png)`;
+
+  
+
   return `
 # ${data.title}
 
@@ -47,14 +51,17 @@ ${issuesBadge}
 
 ## Contributing
 
-If you created an application or package and would like other developers to contribute it, you will want to add guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own.
+${data.contributing} 
 
 ## Tests
 
-Go the extra mile and write tests for your application. Then provide examples on how to run them.
-
+${data.tests}
 
 ---
+
+## Questions
+
+${profileImage}
 
 `;
 }
