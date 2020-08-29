@@ -13,9 +13,36 @@ function init() {
         {
         type: 'input',
         name: 'title',
-        message: "What's the title of this projet?",
+        message: "What's your repository named?",
         default: function () { return 'Project Title';},
+        },
+        {
+            type: 'editor',
+            name: 'description',
+            message: "Enter a description for your project. When you are done, hit 'Escape', then ':x' to exit."
+        },
+        {
+            type: 'confirm',
+            name: 'tableOfContents',
+            message: "Would you like to add a Table of Contents to your ReadMe?"
+        },
+        {
+            type: 'input',
+            name: 'installation',
+            message: "What are the steps required to install your project?"
+        },
+        {
+            type: 'input',
+            name: 'usage',
+            message: "Provide instructions and examples for use."
+        },
+        {
+            type: 'input',
+            name: 'credits',
+            message: "List your collaborators, if any, with links to their GitHub profiles."
         }
+        
+        
     ];
     
     // Ask the questions in the CL
@@ -25,16 +52,10 @@ function init() {
 
         let fileName = `${answers.title}.md`;
 
-        // Store the users answers in an object
-        let userInputs = {
-            userName: answers.userName,
-            title: answers.title
-        }
-
         const generateMarkdown = require('./utils/generateMarkdown.js');
 
         // Generate markdown from the users answers
-        const markdown = generateMarkdown(userInputs);
+        const markdown = generateMarkdown(answers);
 
         writeToFile(fileName, markdown);
     })
