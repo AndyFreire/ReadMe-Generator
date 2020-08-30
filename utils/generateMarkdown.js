@@ -15,9 +15,7 @@ function generateMarkdown(data) {
 
   const licenseBadge = `[![GitHub license](https://img.shields.io/github/license/${data.userName}/${data.title})](https://github.com/${data.userName}/${data.title})`;
 
-  const profileImage = `![${data.userName}](https://github.com/${data.userName}.png)`;
-
-  
+  const profileImage = `![${data.userName}](https://github.com/${data.userName}.png?size=200)`;
 
   return `
 # ${data.title}
@@ -62,6 +60,8 @@ ${data.tests}
 ## Questions
 
 ${profileImage}
+
+${data.emailAddress}
 
 `;
 }

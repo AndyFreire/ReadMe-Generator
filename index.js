@@ -6,15 +6,20 @@ function init() {
     // Create an array of questions for inquirer
     const questions = [
         {
-        type: 'input',
-        name: 'userName',
-        message: "What's your Github Username?",
+            type: 'input',
+            name: 'userName',
+            message: "What's your Github Username?",
         },
         {
-        type: 'input',
-        name: 'title',
-        message: "What's your repository named?",
-        default: function () { return 'Project Title';},
+            type: 'input',
+            name: 'emailAddress',
+            message: "What's the email you want to post on this readme?",
+        },
+        {
+            type: 'input',
+            name: 'title',
+            message: "What's your repository named?",
+            default: function () { return 'Project Title'; },
         },
         {
             type: 'editor',
@@ -40,45 +45,54 @@ function init() {
             type: 'input',
             name: 'credits',
             message: "List your collaborators, if any, with links to their GitHub profiles."
+        },
+        {
+            type: 'input',
+            name: 'contributing',
+            message: "Enter any guidelines for contributing to this repo."
+        },
+        {
+            type: 'input',
+            name: 'tests',
+            message: "Explain how to run the automated tests for this system."
         }
-        
-        
+
     ];
-    
+
     // Ask the questions in the CL
     inquirer.prompt(questions)
-    .then(answers => {
-        // Use user feedback for... whatever!!
+        .then(answers => {
+            // Use user feedback for... whatever!!
 
-        let fileName = `${answers.title}.md`;
+            let fileName = `${answers.title}.md`;
 
-        const generateMarkdown = require('./utils/generateMarkdown.js');
+            const generateMarkdown = require('./utils/generateMarkdown.js');
 
-        // Generate markdown from the users answers
-        const markdown = generateMarkdown(answers);
+            // Generate markdown from the users answers
+            const markdown = generateMarkdown(answers);
 
-        writeToFile(fileName, markdown);
-    })
-    .catch(error => {
-        if(error.isTtyError) {
-        // Prompt couldn't be rendered in the current environment
-        } else {
-        // Something else when wrong
-        }
-    });
+            writeToFile(fileName, markdown);
+        })
+        .catch(error => {
+            if (error.isTtyError) {
+                // Prompt couldn't be rendered in the current environment
+            } else {
+                // Something else when wrong
+            }
+        });
 
 }
 
 function writeToFile(fileName, data) {
     const fs = require('fs');
 
-    fs.writeFile(fileName, data , (err) => {
+    fs.writeFile(fileName, data, (err) => {
         // If there is any error in writing to the file, return
         if (err) {
             console.error(err)
             return
         }
-    
+
         console.log('Wrote README file successfully')
     })
 
